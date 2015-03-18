@@ -9,7 +9,7 @@ class CelctoFarKnown(unittest.TestCase):
 		"""CelctoFar should succeed for all known inputs"""
 		for celc, far in self.knownvalues:
 			result = conversions.convertCelciustoFahrenheit(celc)
-			self.assertEqual(far, result)
+			self.assertAlmostEqual(far, result)
 	
 class CelctoFarBadInput(unittest.TestCase):
 	def testNonNumeric(self):
@@ -28,7 +28,7 @@ class CelctoKelvinKnown(unittest.TestCase):
 		"""CelctoKelvin should succeed on all known inputs"""
 		for celc, kelv in self.knownvalues:
 			result = conversions.convertCelsiustoKelvin(celc)
-			self.assertEqual(kelv, result)
+			self.assertAlmostEqual(kelv, result)
 
 class CelctoKelvinBadInput(unittest.TestCase):
 	def testNonNumeric(self):
@@ -47,7 +47,7 @@ class FahrenheittoCelciusKnown(unittest.TestCase):
 		"""CelctoKelvin should succeed on all known inputs"""
 		for input, output in self.knownvalues:
 			result = conversions.convertFahrenheittoCelcius(input)
-			self.assertEqual(result, output)
+			self.assertAlmostEqual(result, output)
 		
 class FahrenheittoCelciusBadInput(unittest.TestCase):
 	def testNonNumeric(self):
@@ -66,7 +66,7 @@ class FahrenheittoKelvinKnown(unittest.TestCase):
 		"""FahrenheittoKelvin should succeed on all known inputs"""
 		for input, output in self.knownvalues:
 			result = conversions.convertFahrenheittoKelvin(input)
-			self.assertEqual(result, output)
+			self.assertAlmostEqual(result, output)
 			
 class FahrenheittoKelvinBadInput(unittest.TestCase):
 	def testNonNumeric(self):
@@ -84,7 +84,7 @@ class KelvintoCelciusKnown(unittest.TestCase):
 		"""KelvintoCelcius should succeed on all known inputs"""
 		for input, output in self.knownvalues:
 			result = conversions.convertKelvintoCelcius(input)
-			self.assertEqual(result, output)
+			self.assertAlmostEqual(result, output)
 			
 class KelvintoCelciusBadInput(unittest.TestCase):
 	def testNonNumeric(self):
@@ -102,7 +102,7 @@ class KelvintoFahrenheitKnown(unittest.TestCase):
 		"""KelvintoFahrenheit should succeed on all known inputs"""
 		for input, output in self.knownvalues:
 			result = conversions.convertKelvintoFahrenheit(input)
-			self.assertEqual(result, output)
+			self.assertAlmostEqual(result, output)
 			
 class KelvintoFahrenheitBadInput(unittest.TestCase):
 	def testNonNumeric(self):
@@ -121,22 +121,23 @@ class SanityTests(unittest.TestCase):
 			celcius = conversions.convertKelvintoCelcius(i)
 			far = conversions.convertCelciustoFahrenheit(celcius)
 			kelvin = conversions.convertFahrenheittoKelvin(far)
-			self.assertEqual(i, kelvin)
+			self.assertAlmostEqual(i, kelvin)
 	
-	# def testCelsiusSanity(self):
-		# for i in range(-273,100):
-			# i = float(i)
-			# kelvin = conversions.convertCelsiustoKelvin(i)
-			# far = conversions.convertKelvintoFahrenheit(kelvin)
-			# celcius = conversions.convertFahrenheittoCelcius(far)
-			# self.assertEqual(i, celcius)
+	def testCelsiusSanity(self):
+		for i in range(-273,100):
+			i = float(i)
+			kelvin = conversions.convertCelsiustoKelvin(i)
+			far = conversions.convertKelvintoFahrenheit(kelvin)
+			celcius = conversions.convertFahrenheittoCelcius(far)
+			self.assertAlmostEqual(i, celcius)
 	
-	# def testFarSanity(self):
-		# for i in range(-450,212, 5):
-			# i = i * 1.00
-			# celcius = conversions.convertFahrenheittoCelcius(i)
-			# far = conversions.convertCelciustoFahrenheit(celcius)
-			# self.assertEqual(i,far)
+	def testFarSanity(self):
+		for i in range(-450,212, 5):
+			i = i * 1.00
+			celcius = conversions.convertFahrenheittoCelcius(i)
+			far = conversions.convertCelciustoFahrenheit(celcius)
+			far = round(far)
+			self.assertAlmostEqual(i,far)
 
 if __name__ == '__main__':
     unittest.main()
