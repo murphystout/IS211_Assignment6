@@ -114,6 +114,29 @@ class KelvintoFahrenheitBadInput(unittest.TestCase):
 		"""KelvintoFahrenheit should fail on input less than absolute zero"""
 		self.assertRaises(conversions.LowerLimitError, conversions.convertKelvintoFahrenheit, -1)	
 
+class SanityTests(unittest.TestCase):
+	def testKelvinSanity(self):
+		for i in range(0,400):
+			i = float(i)
+			celcius = conversions.convertKelvintoCelcius(i)
+			far = conversions.convertCelciustoFahrenheit(celcius)
+			kelvin = conversions.convertFahrenheittoKelvin(far)
+			self.assertEqual(i, kelvin)
+	
+	# def testCelsiusSanity(self):
+		# for i in range(-273,100):
+			# i = float(i)
+			# kelvin = conversions.convertCelsiustoKelvin(i)
+			# far = conversions.convertKelvintoFahrenheit(kelvin)
+			# celcius = conversions.convertFahrenheittoCelcius(far)
+			# self.assertEqual(i, celcius)
+	
+	# def testFarSanity(self):
+		# for i in range(-450,212, 5):
+			# i = i * 1.00
+			# celcius = conversions.convertFahrenheittoCelcius(i)
+			# far = conversions.convertCelciustoFahrenheit(celcius)
+			# self.assertEqual(i,far)
 
 if __name__ == '__main__':
     unittest.main()
