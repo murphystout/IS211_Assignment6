@@ -49,5 +49,5 @@ def convertKelvintoFahrenheit(input):
 	if input < 0:
 		raise LowerLimitError, 'Lower Limit Error. Kelvin Input less than 0'
 	else:
-		return round(input * 9.0/5.0 - 459.67,2)
+		return round(input * 9.00/5.00 - 459.67,2)
 		
